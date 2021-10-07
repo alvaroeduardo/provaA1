@@ -1,0 +1,28 @@
+{
+  "name": "provaa1",
+  "version": "1.0.0",
+  "description": "API RESTFUL para prova A1",
+  "main": "main.js",
+  "scripts": {
+    "start": "nodemon ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alvaroeduardo/provaA1.git"
+  },
+  "author": "Álvaro Eduardo Silva",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alvaroeduardo/provaA1/issues"
+  },
+  "homepage": "https://github.com/alvaroeduardo/provaA1#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mysql2": "^2.3.0"
+  }
+}
