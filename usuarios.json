@@ -1,0 +1,39 @@
+{  
+    "usuarios":[  
+       { 
+          "nome":"Álvaro Eduardo Silva",
+          "email":"alvaroedusilva@yahoo.com",
+          "celular":37988553610,
+          "usuario_id":1
+       },
+  
+       { 
+        "nome":"Roberto Carlos",
+        "email":"contato@robertocarlinhos.com",
+        "celular":180065545212,
+        "usuario_id":2
+     },
+     
+     { 
+        "nome":"Zezé di Camargo",
+        "email":"contato@sertanejoebao.com",
+        "celular":465521578498,
+        "usuario_id":3
+     },
+
+     { 
+        "nome":"Luciano",
+        "email":"contato@obrabosegundeiro.com",
+        "celular":78459853642,
+        "usuario_id":4
+     },
+
+     { 
+        "nome":"Cazuza",
+        "email":"ceu@paraiso.com",
+        "celular":40028922,
+        "usuario_id":5
+     }
+  
+    ]
+  }

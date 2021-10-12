@@ -1,59 +1,48 @@
 const express = require('express');
-const cookieParser = require('cookie-parser');
-const cors = require('cors');
+const fs = require('fs');
+const bodyParser = require('body-parser');
 
 const port = process.env.PORT || 8000;
 const app = express();
 
-app.use(cookieParser());
-app.use(cors());
-app.use(express.json());
+app.use(bodyParser.urlencoded({ extended:true }));
+app.use(bodyParser.json());
 
-
-// LIVROS
-const livros = ['Harry Potter e a Pedra Filosofal', 'Harry Potter e a Câmara Secreta'];
-
-// REQUISIÇÕES
-// RETORNA TODOS OS LIVROS
-app.get('/', (req, res)=>{
-    return res.json(livros);
+app.use((req, res, next)=>{
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+    res.setHeader("Access-Control-Allow-Headers", "content-type");
+    res.setHeader("Content-Type", "application/json");
+    res.setHeader("Access-Control-Allow-Credentials", true);
+    next();
 });
 
-// RETORNA APENAS 1 LIVRO
-app.get('/:index', (req, res)=>{
-    const {index} = req.params;
+//LISTA TODOS O USUARIO COM BASE NO ID link/api?usuario_id=ID
+app.get("/api", (req, res)=>{
+    fs.readFile("usuarios.json", "utf8", (err, data)=>{
+      if (err) {
+        const response = {status: "falha", resultado: err};
+        res.json(response);
 
-    return res.json(livros[index]);
-})
-
-//ADICIONA UM NOVO LIVRO
-app.post('/', (req, res)=>{
-    const {name} = req.body;
-
-    livros.push(name);
-
-    return res.json(livros);
-})
-
-// ATUALIZA UM LIVRO
-app.put('/livros/:index', (req, res)=>{
-    const {index} = req.params;
-    const {name} = req.body;
-
-    livros[index] = name;
-
-    return res.json(livros);
-})
-
-// DELETA UM LIVRO
-app.delete('/livros/:index', (req, res)=>{
-    const {index} = req.params;
+      } else {
+        const obj = JSON.parse(data);
+        let result = "Nenhum usuário foi encontrado";
     
-    livros.splice(index, 1);
-    return res.json({message: "O livro foi deletado"});
+        obj.usuarios.forEach( usuario => {
+          if (usuario != null) {
+            if (usuario.usuario_id == req.query.usuario_id) {
+              result = usuario;
+            }
+          }
+        });
+    
+        const response = {status: "sucesso", resultado: result};
+        res.json(response);
+      }
+    });
 });
 
-
+// PARA STARTAR O SERVIDOR É SÓ DAR UM NPM START
 app.listen(port, ()=>{
-    console.log('Servidor iniciado com sucesso.')
+    console.log('Servidor iniciado com sucesso na porta:', port)
 })
